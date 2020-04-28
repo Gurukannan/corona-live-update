@@ -1,5 +1,5 @@
 import streamlit as st 
-
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 def main():
 	""" A simple Iris EDA App """
 
