@@ -1,4 +1,5 @@
 import streamlit as st 
+import pandas as pd
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
 #def sentiment_scores(sentence): 
