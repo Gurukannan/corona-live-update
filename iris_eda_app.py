@@ -65,7 +65,7 @@ def main():
 		st.sidebar.markdown('*Analyze tweets and/or facebook posts over a period of time to detect sentiment of a particular audience \n\n *Monitor social media mentions of your brand and automatically categorize by urgency \n\n *Automatically route social media mentions to team members best fit to respond \n\n *Automate any or all of these processes \n\n *Gain deep insights into what’s happening across your social media channels')
 	else:
 		st.sidebar.markdown('Negative: Death Racial discord was conceived, nurtured, refined & perpetuated by Americans incl realDonaldTrump’s father. Get real! \n\n Neutral: HillaryClinton will receive the first question at tonight’s presidential debate, according to CBSNews #ClintonVsTrump. \n\n Positive: Americans trust realDonaldTrump to Make our Economy Great Again! \n\n Positive: wcve it’s amazing how our city loves him and he really loves our city. HillaryClinton made a great choice for Vice President. timkaine.')
-	sentence = st.text_area("Paste some Tweets (or) Social Media Comments (or) News below")
+	sentence = st.text_area("Paste some Tweets (or) Social Media Comments (or) News (or) Sentences below")
 	
 	if st.button('Analyze'):
 		result=sentence.title()
