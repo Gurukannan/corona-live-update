@@ -29,11 +29,11 @@ def sentiment_scores(sentence):
 		overall_rank = 'Neutral' 
 
 	neg_score = "1.Rated Negative Score is" + " " + str(neg_score) + '%'
-	neu_score = "2.Rated Neautral Score is" + " " + str(neu_score)+ '%'
+	neu_score = "2.Rated Neutral Score is" + " " + str(neu_score)+ '%'
 	pos_score= "3.Rated Positive Score is" + " " + str(pos_score)+ '%'
 	comp_score= "4.Rated Compound Score is" + " " + str(comp_score)+ '%'
 	
-	st.bar_chart(df2.T,width=0, height=0, use_container_width=True)
+	st.bar_chart(df2.T)
 	st.write('**_Summary:_**')
 	neg_score 
 	neu_score
