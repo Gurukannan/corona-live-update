@@ -6,7 +6,7 @@ import altair as alt
 def sentiment_scores(sentence): 
 	sid_obj = SentimentIntensityAnalyzer()
 	sentiment_dict = sid_obj.polarity_scores(sentence)
-	st.write("**_Overall sentiment dictionary is : _**", sentiment_dict)
+	st.write("**_Sentiment dictionary : _**", sentiment_dict)
 	#st.write(pd.DataFrame(sentiment_dict, index=[0]))
 	df2=pd.DataFrame(sentiment_dict, index=[0])
 	st.write('**_Chart:_**')
@@ -29,7 +29,7 @@ def sentiment_scores(sentence):
 		overall_rank = 'Neutral' 
 
 	neg_score = "1.Rated Negative Score is" + " " + str(neg_score) + '%'
-	neu_score = "2.Rated Neutral Score is" + " " + str(neu_score)+ '%'
+	neu_score = "2.Rated Neautral Score is" + " " + str(neu_score)+ '%'
 	pos_score= "3.Rated Positive Score is" + " " + str(pos_score)+ '%'
 	comp_score= "4.Rated Compound Score is" + " " + str(comp_score)+ '%'
 	
@@ -65,7 +65,7 @@ def main():
 		st.sidebar.markdown('*Analyze tweets and/or facebook posts over a period of time to detect sentiment of a particular audience \n\n *Monitor social media mentions of your brand and automatically categorize by urgency \n\n *Automatically route social media mentions to team members best fit to respond \n\n *Automate any or all of these processes \n\n *Gain deep insights into what’s happening across your social media channels')
 	else:
 		st.sidebar.markdown('Negative: Death Racial discord was conceived, nurtured, refined & perpetuated by Americans incl realDonaldTrump’s father. Get real! \n\n Neutral: HillaryClinton will receive the first question at tonight’s presidential debate, according to CBSNews #ClintonVsTrump. \n\n Positive: Americans trust realDonaldTrump to Make our Economy Great Again! \n\n Positive: wcve it’s amazing how our city loves him and he really loves our city. HillaryClinton made a great choice for Vice President. timkaine.')
-	sentence = st.text_area("Enter Text","Type Here ..")
+	sentence = st.text_area("Paste some Tweets (or) Social Media Comments (or) News below")
 	
 	if st.button('Analyze'):
 		result=sentence.title()
