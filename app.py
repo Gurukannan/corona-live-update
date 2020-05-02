@@ -67,6 +67,8 @@ def main():
 	agree3 = st.checkbox('States with high Fatality Numbers')
 	if agree3:
 		plot= sns.barplot(x='Deaths',y=fat_larg.index,data=fat_larg)
+		labels=[]
+		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
 
@@ -79,6 +81,8 @@ def main():
 	agree4 = st.checkbox('States with Low Confirmed Numbers')
 	if agree4:
 		plot= sns.barplot(x='Confirmed',y=conf_smal.index,data=conf_smal)
+		labels=[]
+		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
 	#selectbox5
@@ -91,6 +95,8 @@ def main():
 	agree6 = st.checkbox('States with Low Fatality Numbers')
 	if agree6:
 		plot= sns.barplot(x='Deaths',y=fat_smal.index,data=fat_smal)
+		labels=[]
+		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
 
@@ -158,6 +164,9 @@ def main():
 	volume=state_selected['Confirmed']
 	labels=state_selected['District']
 	ax= sns.barplot(x=volume, y=labels,data=state_selected)
+	labels=[]
+	plt.legend()
+	plt.tight_layout()
 	st.pyplot()
 		
 	st.markdown('**_Source - api.covid19india.org_**')
