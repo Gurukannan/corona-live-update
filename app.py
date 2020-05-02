@@ -8,13 +8,6 @@ def main():
 	""" A simple Text Analyzer App """
 
 	st.header('India - Live Coronavirus Update - Guru.K')
-	import streamlit as st
-	import pandas as pd
-	import matplotlib.pyplot as plt
-	import numpy as np
-	import seaborn as sns
-
-	st.header('India - Live Coronavirus Update - Guru.K')
 	st.subheader('_Statewise - Live Corona Update_')
 
 	url='https://api.covid19india.org/csv/latest/state_wise.csv'
