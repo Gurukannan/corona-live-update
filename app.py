@@ -152,23 +152,12 @@ def main():
 	state_selected['Confirmed']=state_selected['Confirmed'].replace(0,np.nan)
 	#sorting volume :
 	state_selected=state_selected.sort_values(['Confirmed'],ascending=False)
-
 	state_selected=state_selected.nlargest(7,'Confirmed')
 	volume=state_selected['Confirmed']
 	labels=state_selected['District']
-	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
+	ax= sns.barplot(x=volume, y=labels,data=state_selected)
 	st.pyplot()
-	df6=state_selected[['District','Confirmed']]
-	#pd.melt(df6,id_vars=['District'],value_vars=['Confirmed'])
-	#df6.set_index('District',inplace=True)
-	#df6
-	#st.bar_chart(state_selected['District'],state_selected['Confirmed'])
-
-	#plt.autoscale()
-	#plt.tight_layout()
-	#df6.plot.barh()
-	#st.pyplot()
-
+		
 	st.markdown('**_Source - api.covid19india.org_**')
 
 	age = st.slider('Please feel free to Numbers this app', 1, 5, 1)
