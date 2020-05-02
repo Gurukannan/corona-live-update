@@ -59,6 +59,8 @@ def main():
 	agree2 = st.checkbox('States with High Recovery Numbers')
 	if agree2:
 		plot= sns.barplot(x='Recovered',y=rec_larg.index,data=rec_larg)
+		labels=[]
+		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
 	#selectbox3
