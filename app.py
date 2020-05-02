@@ -48,11 +48,11 @@ def main():
 	labels=state_selected['District']
 	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
 	st.pyplot()
-	df6=state_selected[['District','Confirmed']]
-	pd.melt(df6,id_vars=['District'],value_vars=['Confirmed'])
-	df6.set_index('District',inplace=True)
-	df6
-	st.bar_chart(df6)
+	#df6=state_selected[['District','Confirmed']]
+	#pd.melt(df6,id_vars=['District'],value_vars=['Confirmed'])
+	#df6.set_index('District',inplace=True)
+	#df6
+	#st.bar_chart(df6)
 
 	st.markdown('**_Source - api.covid19india.org_**')
 
