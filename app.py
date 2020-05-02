@@ -23,11 +23,9 @@ def main():
 	fat_larg=df.nlargest(7,'Deaths')
 
 	#selectbox1
-	agree1 = st.checkbox('States with High Confirmed Numbers')
-	if agree1:
-		plot1= sns.barplot(x=conf_larg['Confirmed'],y=conf_larg.index,data=conf_larg)
-		plt.tight_layout()
-		st.pyplot()
+	plot1= sns.barplot(x=conf_larg['Confirmed'],y=conf_larg.index,data=conf_larg)
+	plt.tight_layout()
+	st.pyplot()
 
 	#selectbox10
 	agree10 = st.checkbox('States with High Confirmed Numbers(With Recovery Comparision)')
@@ -77,14 +75,11 @@ def main():
 	rec_smal=df.nsmallest(7,'Recovered')
 	fat_smal=df.nsmallest(7,'Deaths')
 
-	#selectbox4
-	agree4 = st.checkbox('States with Low Confirmed Numbers')
-	if agree4:
-		plot4= sns.barplot(x=conf_smal['Confirmed'],y=conf_smal.index,data=conf_smal)
-		labels=[]
-		plt.legend()
-		plt.tight_layout()
-		st.pyplot()
+	plot4= sns.barplot(x=conf_smal['Confirmed'],y=conf_smal.index,data=conf_smal)
+	labels=[]
+	plt.legend()
+	plt.tight_layout()
+	st.pyplot()
 	#selectbox5
 	#agree5 = st.checkbox('States with Low Recovery Numbers')
 	#if agree5:
@@ -92,13 +87,11 @@ def main():
 		#plt.tight_layout()
 		#st.pyplot()
 	#selectbox6
-	agree6 = st.checkbox('States with Low Fatality Numbers')
-	if agree6:
-		plot= sns.barplot(x=fat_smal['Deaths'],y=fat_smal.index,data=fat_smal)
-		labels=[]
-		plt.legend()
-		plt.tight_layout()
-		st.pyplot()
+	plot= sns.barplot(x=fat_smal['Deaths'],y=fat_smal.index,data=fat_smal)
+	labels=[]
+	plt.legend()
+	plt.tight_layout()
+	st.pyplot()
 
 	conf_nil=df.loc[df['Confirmed'].isnull()]
 	rec_nil=df.loc[df['Recovered'].isnull()]
