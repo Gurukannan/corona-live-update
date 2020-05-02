@@ -50,13 +50,7 @@ def main():
 	st.pyplot()
 	df6=state_selected[['District','Confirmed']]
 	df6=df6.set_index('District')
-	df6=df6.nlargest(7,'Confirmed')
-	plt.autoscale()
 	st.bar_chart(df6)
-	#plt.autoscale()
-	#plt.tight_layout()
-	#df6.plot.barh()
-	#st.pyplot()
 
 	st.markdown('**_Source - api.covid19india.org_**')
 
