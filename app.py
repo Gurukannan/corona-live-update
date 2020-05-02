@@ -141,7 +141,6 @@ def main():
 	plt.plot(x,y3,'-y',label='Deceased')
 	plt.legend(loc="upper left")
 	#plt.ylim(-1.5, 2.0)
-	plt.show()
 	st.pyplot()
 
 
@@ -162,8 +161,8 @@ def main():
 	state_selected=state_selected.sort_values(['Confirmed'],ascending=False)
 	state_selected=state_selected.nlargest(7,'Confirmed')
 	volume=state_selected['Confirmed']
-	labels=state_selected['District']
-	ax= sns.barplot(x=volume, y=labels,data=state_selected)
+	labels2=state_selected['District']
+	ax= sns.barplot(x=volume, y=labels2,data=state_selected)
 	labels=[]
 	plt.legend()
 	plt.tight_layout()
