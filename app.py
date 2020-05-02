@@ -7,9 +7,9 @@ import seaborn as sns
 def main():
 	""" A simple Text Analyzer App """
 
+	
 	st.header('India - Live Coronavirus Update - Guru.K')
 	st.subheader('_Statewise - Live Corona Update_')
-
 	url='https://api.covid19india.org/csv/latest/state_wise.csv'
 	df=pd.read_csv(url,index_col='State')
 	df= df.iloc[:,:6]
@@ -25,7 +25,7 @@ def main():
 	#selectbox1
 	agree1 = st.checkbox('States with High Confirmed Numbers')
 	if agree1:
-		plot1= sns.barplot(x='Confirmed',y=conf_larg.index,data=conf_larg)
+		plot1= sns.barplot(x=conf_larg['Confirmed'],y=conf_larg.index,data=conf_larg)
 		plt.tight_layout()
 		st.pyplot()
 
@@ -58,7 +58,7 @@ def main():
 	#selectbox2
 	agree2 = st.checkbox('States with High Recovery Numbers')
 	if agree2:
-		plot2= sns.barplot(x='Recovered',y=rec_larg.index,data=rec_larg)
+		plot2= sns.barplot(x=rec_larg['Recovered'],y=rec_larg.index,data=rec_larg)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
@@ -66,7 +66,7 @@ def main():
 	#selectbox3
 	agree3 = st.checkbox('States with high Fatality Numbers')
 	if agree3:
-		plot3= sns.barplot(x='Deaths',y=fat_larg.index,data=fat_larg)
+		plot3= sns.barplot(x=fat_larg['Deaths'],y=fat_larg.index,data=fat_larg)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
@@ -80,7 +80,7 @@ def main():
 	#selectbox4
 	agree4 = st.checkbox('States with Low Confirmed Numbers')
 	if agree4:
-		plot4= sns.barplot(x='Confirmed',y=conf_smal.index,data=conf_smal)
+		plot4= sns.barplot(x=conf_smal['Confirmed'],y=conf_smal.index,data=conf_smal)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
@@ -88,13 +88,13 @@ def main():
 	#selectbox5
 	#agree5 = st.checkbox('States with Low Recovery Numbers')
 	#if agree5:
-		#plot= sns.barplot(x='Recovered',y=rec_smal.index,data=rec_smal)
+		#plot= sns.barplot(x=rec_smal['Recovered'],y=rec_smal.index,data=rec_smal)
 		#plt.tight_layout()
 		#st.pyplot()
 	#selectbox6
 	agree6 = st.checkbox('States with Low Fatality Numbers')
 	if agree6:
-		plot= sns.barplot(x='Deaths',y=fat_smal.index,data=fat_smal)
+		plot= sns.barplot(x=fat_smal['Deaths'],y=fat_smal.index,data=fat_smal)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
