@@ -49,7 +49,8 @@ def main():
 	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
 	st.pyplot()
 	df6=state_selected[['District','Confirmed']]
-	df6=df6.set_index('District')
+	df6.set_index('District', inplace = True)
+	df6
 	st.bar_chart(df6)
 
 	st.markdown('**_Source - api.covid19india.org_**')
