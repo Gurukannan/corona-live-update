@@ -25,7 +25,7 @@ def main():
 	#selectbox1
 	agree1 = st.checkbox('States with High Confirmed Numbers')
 	if agree1:
-		plot= sns.barplot(x='Confirmed',y=conf_larg.index,data=conf_larg)
+		plot1= sns.barplot(x='Confirmed',y=conf_larg.index,data=conf_larg)
 		plt.tight_layout()
 		st.pyplot()
 
@@ -58,7 +58,7 @@ def main():
 	#selectbox2
 	agree2 = st.checkbox('States with High Recovery Numbers')
 	if agree2:
-		plot= sns.barplot(x='Recovered',y=rec_larg.index,data=rec_larg)
+		plot2= sns.barplot(x='Recovered',y=rec_larg.index,data=rec_larg)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
@@ -66,7 +66,7 @@ def main():
 	#selectbox3
 	agree3 = st.checkbox('States with high Fatality Numbers')
 	if agree3:
-		plot= sns.barplot(x='Deaths',y=fat_larg.index,data=fat_larg)
+		plot3= sns.barplot(x='Deaths',y=fat_larg.index,data=fat_larg)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
@@ -80,7 +80,7 @@ def main():
 	#selectbox4
 	agree4 = st.checkbox('States with Low Confirmed Numbers')
 	if agree4:
-		plot= sns.barplot(x='Confirmed',y=conf_smal.index,data=conf_smal)
+		plot4= sns.barplot(x='Confirmed',y=conf_smal.index,data=conf_smal)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
