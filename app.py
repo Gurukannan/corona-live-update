@@ -16,20 +16,16 @@ def main():
 	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
 	recovered_largest=df[['State','Recovered']].nlargest(7,'Recovered')
 	fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
+	confirmed_smallest=df[['State','Confirmed']].nsmallest(7,'Confirmed')
+	
 	
 	agree1 = st.checkbox('States with high numbers')
 	if agree1:
-		#plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
-		#plt.tight_layout()
-		#st.pyplot()
 		ax = confirmed_largest.plot.barh(x='State', y='Confirmed', rot=0)
 		plt.tight_layout()
 		st.pyplot()
 	agree2 = st.checkbox('States with high Rec numbers')
 	if agree2:
-		#plot= sns.barplot(x=recovered_largest['Recovered'], y=recovered_largest['State'],data=recovered_largest)
-		#plt.tight_layout()
-		#st.pyplot()
 		ax = recovered_largest.plot.barh(x='State', y='Recovered', rot=0)
 		plt.tight_layout()
 		st.pyplot()
@@ -39,7 +35,11 @@ def main():
 		ax = fatality_largest.plot.barh(x='State',y='Deaths',rot=0)
 		plt.tight_layout()
 		st.pyplot()
-
+	agree7=st.checkbox('States with Low Numbers')
+	if agree7:
+		ax = confirmed_smallest.plot.barh(x='State', y='Confirmed', rot=0)
+		plt.tight_layout()
+		st.pyplot()
 
 	st.subheader('_Time Series - Live Corona Update_')
 	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
