@@ -15,6 +15,7 @@ def main():
 	df=df.drop(df.index[0])
 	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
 	recovered_largest=df[['State','Recovered']].nlargest(7,'Recovered')
+	fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
 	
 	agree1 = st.checkbox('States with high numbers')
 	if agree1:
@@ -29,6 +30,11 @@ def main():
 		#plt.tight_layout()
 		#st.pyplot()
 		ax = recovered_largest.plot.barh(x='State', y='Recovered', rot=0)
+		st.pyplot()
+
+	agree3=st.checkbox('States with High Fatality')
+	if agree3:
+		ax = fatality_largest.plot.barh(x='State',y='Deaths',rot=0)
 		st.pyplot()
 
 
