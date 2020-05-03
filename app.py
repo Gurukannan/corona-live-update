@@ -23,6 +23,7 @@ def main():
 		#plt.tight_layout()
 		#st.pyplot()
 		ax = confirmed_largest.plot.barh(x='State', y='Confirmed', rot=0)
+		plt.tight_layout()
 		st.pyplot()
 	agree2 = st.checkbox('States with high Rec numbers')
 	if agree2:
@@ -30,11 +31,13 @@ def main():
 		#plt.tight_layout()
 		#st.pyplot()
 		ax = recovered_largest.plot.barh(x='State', y='Recovered', rot=0)
+		plt.tight_layout()
 		st.pyplot()
 
 	agree3=st.checkbox('States with High Fatality')
 	if agree3:
 		ax = fatality_largest.plot.barh(x='State',y='Deaths',rot=0)
+		plt.tight_layout()
 		st.pyplot()
 
 
