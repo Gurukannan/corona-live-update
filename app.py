@@ -18,14 +18,17 @@ def main():
 	
 	agree1 = st.checkbox('States with high numbers')
 	if agree1:
-		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
-		plt.tight_layout()
+		#plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
+		#plt.tight_layout()
+		#st.pyplot()
+		ax = confirmed_largest.plot.barh(x='State', y='Confirmed', rot=0)
 		st.pyplot()
-
 	agree2 = st.checkbox('States with high Rec numbers')
 	if agree2:
-		plot= sns.barplot(x=recovered_largest['Recovered'], y=recovered_largest['State'],data=recovered_largest)
-		plt.tight_layout()
+		#plot= sns.barplot(x=recovered_largest['Recovered'], y=recovered_largest['State'],data=recovered_largest)
+		#plt.tight_layout()
+		#st.pyplot()
+		ax = recovered_largest.plot.barh(x='State', y='Recovered', rot=0)
 		st.pyplot()
 
 
