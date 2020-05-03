@@ -69,8 +69,8 @@ def main():
 		#st.pyplot()
 	
 		abc= pd.DataFrame(rec_larg['Recovered'])
-		plt.plot(abc)
-		st.pyplot()
+		#plt.plot(abc)
+		st.bar_chart(abc)
 	st.dataframe(rec_larg['Recovered'])
 	rec_larg
 	#selectbox3
