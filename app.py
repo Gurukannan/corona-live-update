@@ -67,6 +67,10 @@ def main():
 		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
+	else:	
+		abc= pd.DataFrame(rec_larg['Recovered'])
+		plt.plot(abc)
+		st.pyplot()
 	st.dataframe(rec_larg['Recovered'])
 	rec_larg
 	#selectbox3
