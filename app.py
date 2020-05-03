@@ -27,31 +27,6 @@ def main():
 	plt.tight_layout()
 	st.pyplot()
 
-	#selectbox10
-	agree10 = st.checkbox('States with High Confirmed Numbers(With Recovery Comparision)')
-	if agree10:
-		xpos=np.arange(len(conf_larg.index))
-		plt.yticks(xpos,conf_larg.index)
-		plt.barh(xpos,conf_larg['Confirmed'],label=conf_larg['Confirmed'])
-		plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Recovered'])
-		#plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Deaths'])
-		plt.tight_layout()
-		labels=['Confirmed','Recovered']
-		plt.legend(labels)
-		st.pyplot()
-
-	#selectbox11
-	agree11 = st.checkbox('States with High Confirmed Numbers(With Fatality Comparision)')
-	if agree11:
-		xpos=np.arange(len(conf_larg.index))
-		plt.yticks(xpos,conf_larg.index)
-		plt.barh(xpos,conf_larg['Confirmed'],label=conf_larg['Confirmed'])
-		#plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Recovered'])
-		plt.barh(xpos,conf_larg['Deaths'],label=conf_larg['Deaths'])
-		plt.tight_layout()
-		labels=['Confirmed','Deaths']
-		plt.legend(labels)
-		st.pyplot()
 
 	#selectbox2
 	agree2 = st.checkbox('States with High Recovery Numbers')
