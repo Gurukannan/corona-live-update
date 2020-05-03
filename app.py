@@ -15,18 +15,16 @@ def main():
 	df=df.drop(df.index[0])
 	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
 	recovered_largest=df[['State','Recovered']].nlargest(7,'Recovered')
-	#st.table(confirmed_largest)
-	#plt.bar(confirmed_largest['State'],confirmed_largest#['Confirmed'],color=['g','y','b','r'])
-
-	agree = st.checkbox('States with high numbers')
-	if agree:
+	
+	agree1 = st.checkbox('States with high numbers')
+	if agree1:
 		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree = st.checkbox('States with high Rec numbers')
-	if agree:
-		plot= sns.barplot(x=recovered_largest['Recovered'], y=recovered_largest['State'],data=confirmed_largest)
+	agree2 = st.checkbox('States with high Rec numbers')
+	if agree2:
+		plot= sns.barplot(x=recovered_largest['Recovered'], y=recovered_largest['State'],data=recovered_largest)
 		plt.tight_layout()
 		st.pyplot()
 
