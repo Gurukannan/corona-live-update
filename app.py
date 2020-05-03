@@ -28,6 +28,7 @@ def main():
 		plot1= sns.barplot(x=conf_larg['Confirmed'],y=conf_larg.index,data=conf_larg)
 		plt.tight_layout()
 		st.pyplot()
+	st.dataframe(conf_larg['Confirmed'])
 	conf_larg
 
 	#selectbox10
@@ -60,11 +61,13 @@ def main():
 	#selectbox2
 	agree2 = st.checkbox('States with High Recovery Numbers')
 	if agree2:
-		plot2= sns.barplot(x=rec_larg['Recovered'],y=rec_larg.index,data=rec_larg)
+		abc= pd.DataFrame(rec_larg['Recovered'])
+		plot2= sns.barplot(x=abc.Recovered,y=rec_larg.index,data=rec_larg)
 		labels=[]
 		plt.legend()
 		plt.tight_layout()
 		st.pyplot()
+	st.dataframe(rec_larg['Recovered'])
 	rec_larg
 	#selectbox3
 	agree3 = st.checkbox('States with high Fatality Numbers')
