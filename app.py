@@ -7,8 +7,8 @@ import seaborn as sns
 def main():
 	""" A simple Text Analyzer App """
 
-	st.header('India - Live Coronavirus Update - Guru.K')
-	st.subheader('_Statewise - Live Corona Update_')
+	st.header('CoronaVirus(India) - Sample Analytical App- Guru.K')
+	st.subheader('_Statewise - Latest Corona Update_')
 	df=pd.read_csv('https://api.covid19india.org/csv/latest/state_wise.csv')
 	df= df.iloc[:,:7]
 	st.dataframe(df)
@@ -22,6 +22,13 @@ def main():
 	confirmed_smallest_plus=df[['State','Confirmed','Recovered','Deaths']].nsmallest(7,'Confirmed')
 	recovered_smallest=df[['State','Recovered']].nsmallest(7,'Recovered')
 	fatality_smallest=df[['State','Deaths']].nsmallest(7,'Deaths')
+	
+	#To make charts sorted in order:
+	confirmed_largest=confirmed_largest.sort_values('Confirmed')
+	confirmed_largest_plus=confirmed_largest_plus.sort_values('Confirmed')
+	recovered_largest=recovered_largest.sort_values('Recovered')
+	fatality_largest=fatality_largest.sort_values('Deaths')
+	
 	
 	
 	agree1 = st.checkbox('States with High Confirmed Numbers')
@@ -59,11 +66,11 @@ def main():
 		plt.tight_layout()
 		st.pyplot()
 
-	agree5 = st.checkbox('States with Low Recovery Numbers')
-	if agree5:
-		ax = recovered_smallest.plot.barh(x='State', y='Recovered', rot=0)
-		plt.tight_layout()
-		st.pyplot()
+	#agree5 = st.checkbox('States with Low Recovery Numbers')
+	#if agree5:
+		#ax = recovered_smallest.plot.barh(x='State', y='Recovered', rot=0)
+		#plt.tight_layout()
+		#st.pyplot()
 
 	agree6=st.checkbox('States with Low Fatality')
 	if agree6:
@@ -71,8 +78,28 @@ def main():
 		plt.tight_layout()
 		st.pyplot()
 
+	conf_nil=df.loc[df['Confirmed'].isnull()]
+	rec_nil=df.loc[df['Recovered'].isnull()]
+	fat_nil=df.loc[df['Deaths'].isnull()]
+
+	#selectbox9
+	agree9 = st.checkbox('States with Nil Confirmed')
+	if agree9:
+		conf_nil.iloc[:,0]
+
+	#selectbox10
+	#agree10 = st.checkbox('States with Nil Recovery')
+	#if agree10:
+		#rec_nil.iloc[:,1]
+
+	#selectbox9
+	agree11 = st.checkbox('States with Nil Death')
+	if agree11:
+		fat_nil.iloc[:,0]
+
+
 	
-	st.subheader('_Time Series - Live Corona Update_')
+	st.subheader('_Time Series - Latest Corona Update_')
 	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
 	st.dataframe(df2)
 
@@ -84,7 +111,7 @@ def main():
 	st.pyplot()
 	
 
-	st.subheader('_Districtwise - Live Corona Update_')
+	st.subheader('_Districtwise - Latest Corona Update_')
 	df3=pd.read_csv('https://api.covid19india.org/csv/latest/district_wise.csv')
 	df3=df3[['State','District','Confirmed','Active','Recovered','Deceased']]
 	#st.dataframe(df3)
@@ -99,14 +126,25 @@ def main():
 	state_selected['Confirmed']=state_selected['Confirmed'].replace(0,np.nan)
 	#sorting volume :
 	state_selected=state_selected.sort_values(['Confirmed'],ascending=False)
-	st.dataframe(state_selected)
-
-	state_selected=state_selected.nlargest(7,'Confirmed')
-	volume=state_selected['Confirmed']
-	labels=state_selected['District']
-	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
-	plt.tight_layout()
-	st.pyplot()
+	df5= pd.DataFrame(state_selected)
+	st.dataframe(df5)
+		
+	if df5['Confirmed'].isnull().all() == True:
+		st.write('Selected State contains Zero Confirmed Case')
+			 	
+	else:
+		state_selected=state_selected.nlargest(14,'Confirmed')
+		state_selected.sort_values(by='Confirmed',inplace=True)
+		#state_selected
+		ax = state_selected.plot.barh(x='District', y='Confirmed', rot=0)
+		plt.tight_layout()
+		plt.legend(loc=4)
+		st.pyplot()
+		
+		ax = state_selected.plot.barh(x='District', y=['Confirmed','Active','Recovered','Deceased'], rot=0)
+		plt.tight_layout()
+		plt.legend(loc=4)
+		st.pyplot()
 		
 
 	st.markdown('**_Source - api.covid19india.org_**')
