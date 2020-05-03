@@ -30,7 +30,7 @@ def main():
 		plt.tight_layout()
 		st.pyplot()
 
-	agree7=st.checkbox('States with High Confirmed Numbers(With Recovery & Death Comparision)')
+	agree7=st.checkbox('States with High Confirmed Numbers(With Death & Recovery Comparision)')
 	if agree7:
 		ax = confirmed_largest_plus.plot.barh(x='State', y=['Confirmed','Recovered','Deaths'], rot=0)
 		plt.tight_layout()
@@ -53,7 +53,7 @@ def main():
 		plt.tight_layout()
 		st.pyplot()
 	
-	agree8=st.checkbox('States with High Confirmed Numbers(With Recovery & Death Comparision)')
+	agree8=st.checkbox('States with Low Confirmed Numbers(With Death & Recovery Comparision)')
 	if agree8:
 		ax = confirmed_smallest_plus.plot.barh(x='State', y=['Confirmed','Recovered','Deaths'], rot=0)
 		plt.tight_layout()
