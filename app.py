@@ -14,12 +14,13 @@ def main():
 	st.dataframe(df)
 	df=df.drop(df.index[0])
 	
-	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
-	recovery_largest=df[['State','Recovered']].nlargest(7,'Recovered')
-	fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
+	#confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
+	#recovery_largest=df[['State','Recovered']].nlargest(7,'Recovered')
+	#fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
 
 	agree = st.checkbox('States with High Confirmed Numbers')
 	if agree:
+		confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
 		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
 		plt.tight_layout()
 		st.pyplot()
@@ -27,12 +28,14 @@ def main():
 		
 	agree = st.checkbox('States with High Recovery Numbers')
 	if agree:
+		recovery_largest=df[['State','Recovered']].nlargest(7,'Recovered')
 		plot= sns.barplot(x=recovery_largest['Recovered'], y=recovery_largest['State'],data=recovery_largest)
 		plt.tight_layout()
 		st.pyplot()
 
 	agree = st.checkbox('States with high Fatality Numbers')
 	if agree:
+		fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
 		plot= sns.barplot(x=fatality_largest['Deaths'], y=fatality_largest['State'],data=fatality_largest)
 		plt.tight_layout()
 		st.pyplot()
