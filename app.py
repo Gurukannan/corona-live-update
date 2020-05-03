@@ -13,22 +13,54 @@ def main():
 	df= df.iloc[:,:7]
 	st.dataframe(df)
 	df=df.drop(df.index[0])
+	
 	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
 	recovery_largest=df[['State','Recovered']].nlargest(7,'Recovered')
-	#st.table(confirmed_largest)
-	#plt.bar(confirmed_largest['State'],confirmed_largest#['Confirmed'],color=['g','y','b','r'])
+	fatality_largest=df[['State','Deaths']].nlargest(7,'Deaths')
 
-	agree = st.checkbox('States with high rec numbers')
+	agree = st.checkbox('States with High Confirmed Numbers')
+	if agree:
+		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
+		plt.tight_layout()
+		st.pyplot()
+
+		
+	agree = st.checkbox('States with High Recovery Numbers')
 	if agree:
 		plot= sns.barplot(x=recovery_largest['Recovered'], y=recovery_largest['State'],data=recovery_largest)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree = st.checkbox('States with high numbers')
+	agree = st.checkbox('States with high Fatality Numbers')
 	if agree:
-		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
+		plot= sns.barplot(x=fatality_largest['Deaths'], y=fatality_largest['State'],data=fatality_largest)
 		plt.tight_layout()
 		st.pyplot()
+
+	confirmed_smallest=df[['State','Confirmed']].nsmallest(7,'Confirmed')
+	recovery_smallest=df[['State','Recovered']].nsmallest(7,'Recovered')
+	fatality_smallest=df[['State','Deaths']].nsmallest(7,'Deaths')
+
+	agree = st.checkbox('States with Low Confirmed Numbers')
+	if agree:
+		plot= sns.barplot(x=confirmed_smallest['Confirmed'], y=confirmed_smallest['State'],data=confirmed_smallest)
+		plt.tight_layout()
+		st.pyplot()
+
+		
+	agree = st.checkbox('States with Low Recovery Numbers')
+	if agree:
+		plot= sns.barplot(x=recovery_smallest['Recovered'], y=recovery_smallest['State'],data=recovery_smallest)
+		plt.tight_layout()
+		st.pyplot()
+
+	agree = st.checkbox('States with Low Fatality Numbers')
+	if agree:
+		plot= sns.barplot(x=fatality_smallest['Deaths'], y=fatality_smallest['State'],data=fatality_smallest)
+		plt.tight_layout()
+		st.pyplot()
+
+	
 
 	st.subheader('_Time Series - Live Corona Update_')
 	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
