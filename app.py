@@ -7,159 +7,37 @@ import seaborn as sns
 def main():
 	""" A simple Text Analyzer App """
 
-	
 	st.header('India - Live Coronavirus Update - Guru.K')
 	st.subheader('_Statewise - Live Corona Update_')
-	url='https://api.covid19india.org/csv/latest/state_wise.csv'
-	df=pd.read_csv(url,index_col='State')
-	df= df.iloc[:,:6]
-	df=df.replace(0,np.NaN)
+	df=pd.read_csv('https://api.covid19india.org/csv/latest/state_wise.csv')
+	df= df.iloc[:,:7]
 	st.dataframe(df)
-	#Drop Total Row:
-	df=df.drop('Total')
+	df=df.drop(df.index[0])
+	confirmed_largest=df[['State','Confirmed']].nlargest(7,'Confirmed')
+	recovery_largest=df[['State','Recovered']].nlargest(7,'Recovered')
+	#st.table(confirmed_largest)
+	#plt.bar(confirmed_largest['State'],confirmed_largest#['Confirmed'],color=['g','y','b','r'])
 
-	conf_larg=df.nlargest(7,'Confirmed')
-	rec_larg=df.nlargest(7,'Recovered')
-	fat_larg=df.nlargest(7,'Deaths')
-
-	#selectbox1
-	agree1 = st.checkbox('States with High Confirmed Numbers')
-	if agree1:
-		plot1= sns.barplot(x=conf_larg['Confirmed'],y=conf_larg.index,data=conf_larg)
-		plt.tight_layout()
-		st.pyplot()
-	st.dataframe(conf_larg['Confirmed'])
-	conf_larg
-
-	#selectbox10
-	agree10 = st.checkbox('States with High Confirmed Numbers(With Recovery Comparision)')
-	if agree10:
-		xpos=np.arange(len(conf_larg.index))
-		plt.yticks(xpos,conf_larg.index)
-		plt.barh(xpos,conf_larg['Confirmed'],label=conf_larg['Confirmed'])
-		plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Recovered'])
-		#plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Deaths'])
-		plt.tight_layout()
-		labels=['Confirmed','Recovered']
-		plt.legend(labels)
-		st.pyplot()
-	conf_larg
-	#selectbox11
-	agree11 = st.checkbox('States with High Confirmed Numbers(With Fatality Comparision)')
-	if agree11:
-		xpos=np.arange(len(conf_larg.index))
-		plt.yticks(xpos,conf_larg.index)
-		plt.barh(xpos,conf_larg['Confirmed'],label=conf_larg['Confirmed'])
-		#plt.barh(xpos,conf_larg['Recovered'],label=conf_larg['Recovered'])
-		plt.barh(xpos,conf_larg['Deaths'],label=conf_larg['Deaths'])
-		plt.tight_layout()
-		labels=['Confirmed','Deaths']
-		plt.legend(labels)
-		st.pyplot()
-	conf_larg
-
-	#selectbox2
-	agree2 = st.checkbox('States with High Recovery Numbers')
-	if agree2:
-		#abc= pd.DataFrame(rec_larg['Recovered'])
-		#plot2= sns.barplot(x=abc.Recovered,y=rec_larg.index,data=rec_larg)
-		#labels=[]
-		#plt.legend()
-		#plt.tight_layout()
-		#st.pyplot()
-	
-		abc= pd.DataFrame(rec_larg['Recovered'])
-		#plt.plot(abc)
-		st.bar_chart(abc)
-	st.dataframe(rec_larg['Recovered'])
-	rec_larg
-	#selectbox3
-	agree3 = st.checkbox('States with high Fatality Numbers')
-	if agree3:
-		plot3= sns.barplot(x=fat_larg['Deaths'],y=fat_larg.index,data=fat_larg)
-		labels=[]
-		plt.legend()
-		plt.tight_layout()
-		st.pyplot()
-	
-	fat_larg
-
-	conf_smal=df.nsmallest(7,'Confirmed')
-	rec_smal=df.nsmallest(7,'Recovered')
-	fat_smal=df.nsmallest(7,'Deaths')
-
-	#selectbox4
-	agree4 = st.checkbox('States with Low Confirmed Numbers')
-	if agree4:
-		plot4= sns.barplot(x=conf_smal['Confirmed'],y=conf_smal.index,data=conf_smal)
-		labels=[]
-		plt.legend()
-		plt.tight_layout()
-		st.pyplot()
-	conf_smal
-	#selectbox5
-	#agree5 = st.checkbox('States with Low Recovery Numbers')
-	#if agree5:
-		#plot= sns.barplot(x=rec_smal['Recovered'],y=rec_smal.index,data=rec_smal)
-		#plt.tight_layout()
-		#st.pyplot()
-	#selectbox6
-	agree6 = st.checkbox('States with Low Fatality Numbers')
-	if agree6:
-		plot= sns.barplot(x=fat_smal['Deaths'],y=fat_smal.index,data=fat_smal)
-		labels=[]
-		plt.legend()
+	agree = st.checkbox('States with high rec numbers')
+	if agree:
+		plot= sns.barplot(x=recovery_largest['Recovered'], y=recovery_largest['State'],data=recovery_largest)
 		plt.tight_layout()
 		st.pyplot()
 
-	conf_nil=df.loc[df['Confirmed'].isnull()]
-	rec_nil=df.loc[df['Recovered'].isnull()]
-	fat_nil=df.loc[df['Deaths'].isnull()]
-
-	#selectbox7
-	agree7 = st.checkbox('States with Nil Confirmed')
-	if agree7:
-		conf_nil.iloc[:,0]
-
-	#selectbox8
-	agree8 = st.checkbox('States with Nil Recovery')
-	if agree8:
-		rec_nil.iloc[:,1]
-
-	#selectbox9
-	agree9 = st.checkbox('States with Nil Death')
-	if agree9:
-		fat_nil.iloc[:,2]
-
+	agree = st.checkbox('States with high numbers')
+	if agree:
+		plot= sns.barplot(x=confirmed_largest['Confirmed'], y=confirmed_largest['State'],data=confirmed_largest)
+		plt.tight_layout()
+		st.pyplot()
 
 	st.subheader('_Time Series - Live Corona Update_')
-	url2='https://api.covid19india.org/csv/latest/case_time_series.csv'
-	df2=pd.read_csv(url2)
+	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
 	st.dataframe(df2)
-	#Chart:
-	df2[['Day','Month']] = df2.Date.apply(lambda x: pd.Series(str(x).split()))
-	graph1=df2.groupby('Month')['Daily Confirmed','Daily Recovered','Daily Deceased'].sum()
-	new_order = ['January', 'February', 'March', 'April', 'May']
-	graph1 = graph1.reindex(new_order, axis=0)
-	graph1
-
-	x = graph1.index
-	y1 = graph1['Daily Confirmed']
-	y2 = graph1['Daily Recovered']
-	y3 = graph1['Daily Deceased']
-
-	plt.plot(x, y1, "-b", label="Confrimed")
-	plt.plot(x, y2, "-r", label="Recovered")
-	plt.plot(x,y3,'-y',label='Deceased')
-	plt.legend(loc="upper left")
-	#plt.ylim(-1.5, 2.0)
-	st.pyplot()
-
 
 	st.subheader('_Districtwise - Live Corona Update_')
 	df3=pd.read_csv('https://api.covid19india.org/csv/latest/district_wise.csv')
 	df3=df3[['State','District','Confirmed','Active','Recovered','Deceased']]
-	#st.dataframe(df3)
+	st.dataframe(df3)
 
 	#plot TreeMap
 	unique_states=df3['State'].unique()
@@ -171,19 +49,28 @@ def main():
 	state_selected['Confirmed']=state_selected['Confirmed'].replace(0,np.nan)
 	#sorting volume :
 	state_selected=state_selected.sort_values(['Confirmed'],ascending=False)
+
 	state_selected=state_selected.nlargest(7,'Confirmed')
 	volume=state_selected['Confirmed']
-	labels2=state_selected['District']
-	ax= sns.barplot(x=volume, y=labels2,data=state_selected)
-	labels=[]
-	plt.legend()
-	plt.tight_layout()
+	labels=state_selected['District']
+	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
 	st.pyplot()
-		
+	df6=state_selected[['District','Confirmed']]
+	#pd.melt(df6,id_vars=['District'],value_vars=['Confirmed'])
+	#df6.set_index('District',inplace=True)
+	#df6
+	#st.bar_chart(state_selected['District'],state_selected['Confirmed'])
+
+	#plt.autoscale()
+	#plt.tight_layout()
+	#df6.plot.barh()
+	#st.pyplot()
+
 	st.markdown('**_Source - api.covid19india.org_**')
 
-	age = st.slider('Please feel free to Numbers this app', 1, 5, 1)
+	age = st.slider('Please feel free to rate this app', 1, 5, 1)
 	if st.button('Submit'):
 		st.write('Thank you for the feedback')
+	
 if __name__ == '__main__':
 	main()
