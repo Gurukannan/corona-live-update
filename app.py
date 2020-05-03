@@ -24,42 +24,42 @@ def main():
 	fatality_smallest=df[['State','Deaths']].nsmallest(7,'Deaths')
 	
 	
-	agree1 = st.checkbox('States with high numbers')
+	agree1 = st.checkbox('States with High Confirmed Numbers')
 	if agree1:
 		ax = confirmed_largest.plot.barh(x='State', y='Confirmed', rot=0)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree7=st.checkbox('States with high comp')
+	agree7=st.checkbox('States with High Confirmed Numbers(With Recovery & Death Comparision)')
 	if agree7:
 		ax = confirmed_largest_plus.plot.barh(x='State', y=['Confirmed','Recovered','Deaths'], rot=0)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree2 = st.checkbox('States with high Rec numbers')
+	agree2 = st.checkbox('States with High Recovery Numbers')
 	if agree2:
 		ax = recovered_largest.plot.barh(x='State', y='Recovered', rot=0)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree3=st.checkbox('States with High Fatality')
+	agree3=st.checkbox('States with high Fatality Numbers')
 	if agree3:
 		ax = fatality_largest.plot.barh(x='State',y='Deaths',rot=0)
 		plt.tight_layout()
 		st.pyplot()
-	agree4=st.checkbox('States with Low Numbers')
+	agree4=st.checkbox('States with Low Confirmed Numbers')
 	if agree4:
 		ax = confirmed_smallest.plot.barh(x='State', y='Confirmed', rot=0)
 		plt.tight_layout()
 		st.pyplot()
 	
-	agree8=st.checkbox('States with Low Comp')
+	agree8=st.checkbox('States with High Confirmed Numbers(With Recovery & Death Comparision)')
 	if agree8:
 		ax = confirmed_smallest_plus.plot.barh(x='State', y=['Confirmed','Recovered','Deaths'], rot=0)
 		plt.tight_layout()
 		st.pyplot()
 
-	agree5 = st.checkbox('States with Low Rec numbers')
+	agree5 = st.checkbox('States with Low Recovery Numbers')
 	if agree5:
 		ax = recovered_smallest.plot.barh(x='State', y='Recovered', rot=0)
 		plt.tight_layout()
@@ -76,37 +76,38 @@ def main():
 	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
 	st.dataframe(df2)
 
+	# plot data
+	df2=pd.read_csv('https://api.covid19india.org/csv/latest/case_time_series.csv')
+	df2[['Day','Month']] = df2.Date.apply(lambda x: pd.Series(str(x).split()))
+	df2.groupby(['Month'])['Daily Confirmed','Daily Recovered','Daily Deceased'].sum().plot(kind='line')
+	#df4
+	st.pyplot()
+	
+
 	st.subheader('_Districtwise - Live Corona Update_')
 	df3=pd.read_csv('https://api.covid19india.org/csv/latest/district_wise.csv')
 	df3=df3[['State','District','Confirmed','Active','Recovered','Deceased']]
-	st.dataframe(df3)
+	#st.dataframe(df3)
 
 	#plot TreeMap
 	unique_states=df3['State'].unique()
+	unique_states.sort()
 	option = st.selectbox('Select a State',unique_states)
 	filt=df3['State']==option
 	state_selected=df3.loc[filt]
-	st.dataframe(state_selected)
 	#converting 0 to Nan for treemap
 	state_selected['Confirmed']=state_selected['Confirmed'].replace(0,np.nan)
 	#sorting volume :
 	state_selected=state_selected.sort_values(['Confirmed'],ascending=False)
+	st.dataframe(state_selected)
 
 	state_selected=state_selected.nlargest(7,'Confirmed')
 	volume=state_selected['Confirmed']
 	labels=state_selected['District']
 	ax= sns.barplot(x=volume, y=labels,data=state_selected,label='small')
+	plt.tight_layout()
 	st.pyplot()
-	df6=state_selected[['District','Confirmed']]
-	#pd.melt(df6,id_vars=['District'],value_vars=['Confirmed'])
-	#df6.set_index('District',inplace=True)
-	#df6
-	#st.bar_chart(state_selected['District'],state_selected['Confirmed'])
-
-	#plt.autoscale()
-	#plt.tight_layout()
-	#df6.plot.barh()
-	#st.pyplot()
+		
 
 	st.markdown('**_Source - api.covid19india.org_**')
 
