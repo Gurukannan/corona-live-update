@@ -1,5 +1,4 @@
-# iris-eda-app
-Simple Iris EDA app with streamlit
+Corona Virus - Analytics App
 
 # Required Files
 1 setup.sh
